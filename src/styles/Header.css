@@ -1,0 +1,24 @@
+.headerContainer {
+    width: 35%;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.342);
+    border-radius: 10px;
+    text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.headerTitle {
+    text-align: center;
+}
+
+.headerInput {
+    align-items: center;
+    padding: 10px;
+}
+
+.headerInput Button {
+    margin-top: 10px;
+    width: 100%;
+}

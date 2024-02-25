@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import "./styles/App.css";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, Row } from 'react-bootstrap';
+import Header from './components/Header';
+import TodoList from './components/TodoList';
 
-function App() {
+export type Todo = {
+  id: number;
+  text: string;
+}
+
+const App = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const addTodoItem = (text: string) => {
+    const newTodo = { id: Date.now(), text: text };
+    setTodos([...todos, newTodo]);
+  };
+
+  const deleteTodoItem = (id: number) => {
+    const deletedTodo = todos.filter(todo => todo.id !== id);
+    setTodos(deletedTodo);
+  };
+
+  const editTodoItem = (id: number, newText: string) => {
+    const editTodo = todos.map(todo => todo.id === id ? {...todo, text: newText }: todo);
+    setTodos(editTodo);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Container>
+        <Row>
+          <Header onAdd={addTodoItem} />
+        </Row>
+        <Row>
+          <TodoList
+            todos={todos}
+            onDelete={deleteTodoItem}
+            onEdit={editTodoItem}
+          />
+        </Row>
+      </Container>
     </div>
   );
 }
